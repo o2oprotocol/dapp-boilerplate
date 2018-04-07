@@ -1,0 +1,29 @@
+{
+  "name": "dapp-boilerplate",
+  "version": "1.0.0",
+  "description": "Truffle Box - Boilerplate for Ethereum dApps, built on Truffle 4.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/o2oprotocol/dapp-boilerplate.git"
+  },
+  "keywords": [
+    "Truffle",
+    "Box",
+    "dApp",
+    "Ethereum",
+    "dApp",
+    "Truffle",
+    "Boilerplate",
+    "React"
+  ],
+  "author": "O2OProtocol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/o2oprotocol/dapp-boilerplate/issues"
+  },
+  "homepage": "https://github.com/o2oprotocol/dapp-boilerplate#readme"
+}
