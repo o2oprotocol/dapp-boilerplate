@@ -1,6 +1,6 @@
 {
-  "short_name": "React DApp",
-  "name": "React Ethereum DApp",
+  "short_name": "DApp",
+  "name": "DApp Boilerplate",
   "icons": [
     {
       "src": "favicon.ico",

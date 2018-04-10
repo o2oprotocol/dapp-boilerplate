@@ -4,15 +4,24 @@
   "description": "Truffle Box - Boilerplate for Ethereum dApps, built on Truffle 4.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
+  "author": "O2OProtocol",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/o2oprotocol/dapp-boilerplate/issues"
+  },
+  "homepage": "https://github.com/o2oprotocol/dapp-boilerplate#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/o2oprotocol/dapp-boilerplate.git"
-  "version": "0.1.0",
-  "private": true,
+  },
   "dependencies": {
     "react": "^16.3.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^16.3.1",
     "react-scripts": "1.1.4"
   },
@@ -26,17 +35,8 @@
     "Boilerplate",
     "React"
   ],
-  "author": "O2OProtocol",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/o2oprotocol/dapp-boilerplate/issues"
-  },
-  "homepage": "https://github.com/o2oprotocol/dapp-boilerplate#readme"
-}
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1"
   }
 }
