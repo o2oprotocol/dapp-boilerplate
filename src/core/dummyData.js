@@ -592,9 +592,17 @@ const getCategories = ({lang, name, id}) => {
   return [];
 }
 
+const getProducts = (options) => {
+  if (!options) return [];
+  const keys = Object.keys(options);
+  return products.filter(p => keys.reduce((res, k) => (res || p[k].toLowerCase().indexOf(`${options[k]}`.toLowerCase()) > -1), false));
+}
+
 module.exports = {
   getCategories,
+  getProducts,
 }
 
 // const cats = getCategories({ name: 'Galaxy V' });
-// console.log(cats)
+// const prods = getProducts({ name: 'galaxy' });
+// console.log(prods);
