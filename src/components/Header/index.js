@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 
-import HeaderBackground from '../../assets/images/header-1.jpeg';
+import SearchBox from 'components/SearchBox';
+import HeaderBackground from 'assets/images/header-1.jpeg';
 import ImgBackground from './ImgBackground';
 
 const TitleArea = (props) => (
@@ -11,13 +12,9 @@ const TitleArea = (props) => (
   </div>
 );
 
-const SearchBox = (props) => (
-  <div className="button-get-started">
-    <a href="/" className="btn btn-white btn-fill btn-lg ">
-      Get Started
-    </a>
-  </div>
-);
+// const SearchBox = (props) => (   <div className="button-get-started">     <a
+// href="/" className="btn btn-white btn-fill btn-lg ">       Get Started
+// </a>   </div> );
 
 class Header extends Component {
   render() {

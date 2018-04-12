@@ -1,0 +1,43 @@
+/* Search Area */
+
+.search-box {
+  max-width: 760px;
+  margin: 0 auto 70px;
+  display: block;
+  padding: 0 15px;
+  text-align: center;
+}
+
+.search-box .input-group {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.search-box input:focus {
+  background: #fff !important;
+  outline: 0;
+  color: #333;
+}
+
+.search-box .rbt-input,
+.search-box .rbt-input-hint {
+  width: 100%;
+}
+
+.search-box .rbt input {
+  border-radius: 4px 0 0 4px;
+  border: 1px solid #E3E3E3;
+}
+
+.search-box .rbt input:focus {
+  border: 1px solid #E3E3E3;
+  border-right: 0;
+}
+
+.search-box .input-group span {
+  cursor: pointer;
+}
+
+.search-box .input-group {
+  box-shadow: 0 5px 30px rgba(156,160,171,0.25) !important;
+}

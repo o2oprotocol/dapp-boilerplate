@@ -1,20 +1,23 @@
 import React, {Component} from 'react';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
+import Layout from 'components/Layout';
+import Web3Provider from 'core/web3-provider';
+import HomePage from 'containers/HomePage';
 import './index.css';
-import Header from '../../components/Header';
-import NavBar from '../../components/NavBar';
-import Section from '../../components/Section';
-import Footer from '../../components/Footer';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <NavBar/>
-        <Header/>
-        <Section/>
-        <Footer/>
-      </div>
+      <Router>
+        <Layout>
+          <Web3Provider>
+            <Switch>
+              <Route exact path="/" component={HomePage}/>
+            </Switch>
+          </Web3Provider>
+        </Layout>
+      </Router>
     );
   }
 }
