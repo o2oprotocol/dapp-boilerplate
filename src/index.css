@@ -3727,3 +3727,13 @@ body {
     padding: 0;
   }
 }
+
+.modal-content .image-container img {
+  width: 54px;
+  height: 54px;
+  margin-bottom: 30px;
+}
+
+.modal-dialog {
+  padding-top: 40vh;
+}

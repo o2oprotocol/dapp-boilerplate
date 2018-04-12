@@ -88,9 +88,9 @@ ajv@^6.0.1:
     json-schema-traverse "^0.3.0"
     uri-js "^3.0.2"
 
-"alertify@https://github.com/lucduong/alertify.js.git#0.3":
-  version "0.3.11"
-  resolved "https://github.com/lucduong/alertify.js.git#6c896fb3f1024601864b988c2d3ddaaa1742e38a"
+alertifyjs@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/alertifyjs/-/alertifyjs-1.11.1.tgz#e40e45c4fde4234467cc481b936fe6337e6a4828"
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
@@ -4179,10 +4179,6 @@ jest@20.0.4:
   dependencies:
     jest-cli "^20.0.4"
 
-jquery@^3.3.1:
-  version "3.3.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
-
 js-base64@^2.1.9:
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.3.tgz#2e545ec2b0f2957f41356510205214e98fad6582"
@@ -4462,7 +4458,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.3.0:
+"lodash@>=3.5 <5", lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.3.0:
   version "4.17.5"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.5.tgz#99a92d65c0272debe8c96b6057bc8fbfa3bed511"
 

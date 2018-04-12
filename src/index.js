@@ -9,5 +9,5 @@ import registerServiceWorker from './registerServiceWorker';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 ReactDOM.render(
-  <App/>, document.getElementById('root'));
+  <App />, document.getElementById('root'));
 registerServiceWorker();
