@@ -20,7 +20,7 @@
     "url": "git+https://github.com/o2oprotocol/dapp-boilerplate.git"
   },
   "dependencies": {
-    "alertify": "^0.3.0",
+    "alertify": "https://github.com/lucduong/alertify.js.git#0.3",
     "jquery": "^3.3.1",
     "moment": "^2.22.0",
     "prop-types": "^15.6.1",

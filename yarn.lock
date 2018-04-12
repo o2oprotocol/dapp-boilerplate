@@ -88,9 +88,9 @@ ajv@^6.0.1:
     json-schema-traverse "^0.3.0"
     uri-js "^3.0.2"
 
-alertify@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/alertify/-/alertify-0.3.0.tgz#32ada3298ff4d91ace71f2746d70910a7bd08135"
+"alertify@https://github.com/lucduong/alertify.js.git#0.3":
+  version "0.3.11"
+  resolved "https://github.com/lucduong/alertify.js.git#6c896fb3f1024601864b988c2d3ddaaa1742e38a"
 
 align-text@^0.1.1, align-text@^0.1.3:
   version "0.1.4"
