@@ -1,10 +1,38 @@
 import React, {Component} from 'react';
 
 class NavBar extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      transparentClass: 'navbar-transparent',
+      allowTransparent: true
+    };
+    this.handleScroll = this.handleScroll.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll(event) {
+    const scrollTop = event.srcElement.documentElement.scrollTop;
+    const {colorOnScroll} = this.props;
+    const scrollDistance = colorOnScroll || 500;
+    this.setState({
+      allowTransparent: scrollTop < scrollDistance
+    });
+  }
+
   render() {
     return (
       <nav
-        className="navbar navbar-default navbar-transparent navbar-fixed-top">
+        className={`navbar navbar-default navbar-fixed-top ${this.state.allowTransparent
+        ? this.state.transparentClass
+        : ''}`}>
         <div className="container">
           <div className="navbar-header">
             <button

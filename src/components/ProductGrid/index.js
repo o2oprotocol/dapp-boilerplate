@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { chunk } from 'lodash';
 
 import ProductCard from 'components/ProductCard';
@@ -7,7 +6,7 @@ import ProductCard from 'components/ProductCard';
 class ProductGrid extends Component {
   renderRow(products) {
     const len = products.length;
-    const colSize = parseInt(12 / len);
+    const colSize = parseInt(12 / len, 10);
     return (
       <div className="row">
         {products.map(p => (

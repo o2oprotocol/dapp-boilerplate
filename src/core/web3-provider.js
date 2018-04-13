@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import Modal from 'components/Modal';
 import { Modal } from 'react-bootstrap';
 import alertify from 'alertifyjs';
 

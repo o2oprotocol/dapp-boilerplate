@@ -22,3 +22,10 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.rbt-input, .rbt-input-hint {
+  font-size: 14px;
+  line-height: 20px;
+  padding: 8px 10px;
+  font-family: "Poppins", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}

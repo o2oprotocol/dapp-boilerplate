@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
 import SearchBox from 'components/SearchBox';
@@ -12,10 +13,6 @@ const TitleArea = (props) => (
   </div>
 );
 
-// const SearchBox = (props) => (   <div className="button-get-started">     <a
-// href="/" className="btn btn-white btn-fill btn-lg ">       Get Started
-// </a>   </div> );
-
 class Header extends Component {
   render() {
     return (
@@ -25,7 +22,7 @@ class Header extends Component {
           <div className="container">
             <div className="content">
               <TitleArea/>
-              <SearchBox/>
+              <SearchBox onSearchClick={this.props.onSearchClick}/>
             </div>
           </div>
         </div>
@@ -33,5 +30,9 @@ class Header extends Component {
     );
   }
 }
+
+Header.propTypes = {
+  onSearchClick: PropTypes.func
+};
 
 export default Header;

@@ -1,22 +1,33 @@
-import React, { Component } from 'react';
-import { withRouter } from 'react-router';
+import React, {Component} from 'react';
+import {withRouter} from 'react-router';
+import QueryString from 'query-string';
 
+import Listings from 'containers/ListingsGrid';
 import Section from 'components/Section';
-import ProductGrid from 'components/ProductGrid';
+import Header from 'components/Header';
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      products: [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}]
+      products: []
     };
+    this.handleSearchClick = this
+      .handleSearchClick
+      .bind(this);
+  }
+
+  handleSearchClick(query) {
+    window.location.href = `/?q=${query}`
   }
 
   render() {
+    const {q} = QueryString.parse(this.props.location.search)
     return (
       <div className="home">
-        <Section title={"Our Services"} separator={true}>
-          <ProductGrid products={this.state.products} />
+        {!q && <Header onSearchClick={this.handleSearchClick}/>}
+        <Section title={"Listings"} separator={true}>
+          <Listings query={q}/>
         </Section>
       </div>
     );
