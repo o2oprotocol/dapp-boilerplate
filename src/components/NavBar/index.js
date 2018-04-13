@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { Link } from 'react-router-dom';
 
 class NavBar extends Component {
   constructor(props) {
@@ -7,7 +8,9 @@ class NavBar extends Component {
       transparentClass: 'navbar-transparent',
       allowTransparent: true
     };
-    this.handleScroll = this.handleScroll.bind(this);
+    this.handleScroll = this
+      .handleScroll
+      .bind(this);
   }
 
   componentDidMount() {
@@ -53,7 +56,16 @@ class NavBar extends Component {
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right navbar-uppercase">
               <li>
-                <a href="/">About Us</a>
+                <Link to="/my-purchases" className="nav-item nav-link">My Purchases</Link>
+              </li>
+              <li>
+                <Link to="/my-listings" className="nav-item nav-link">My Listings</Link>
+              </li>
+              <li>
+                <Link to="/create" className="nav-item nav-link">
+                  <i className="fa fa-plus-circle" style={{marginRight: '2px', fontSize: '13px'}}></i>
+                  Add Listing
+                </Link>
               </li>
               <li>
                 <a

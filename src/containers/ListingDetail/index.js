@@ -7,15 +7,8 @@ import alertify from 'alertifyjs';
 // using a global singleton
 import o2oprotocol from 'core/o2oprotocol';
 import Header from 'components/Header';
+import StaticModal from 'components/StaticModal';
 import SectionSeparator from 'components/Section/SectionSeparator';
-
-const SimpleModal = (props) => (
-  <Modal show={true}>
-    <Modal.Body className='text-center'>
-      {props.children}
-    </Modal.Body>
-  </Modal>
-);
 
 class ListingsDetail extends Component {
 
@@ -96,26 +89,28 @@ class ListingsDetail extends Component {
       : this.state.price
     return (
       <div className="listing-detail">
-        <Header classes={['section-header-blog']} bgColor="black">
-          <h1>{this.state.name}</h1>
-          <h3 className="subtitle">{this.state.category}</h3>
-          <SectionSeparator />
-        </Header>
-        {this.state.step === this.STEP.METAMASK && <SimpleModal backdrop="static" isOpen={true}>
+        {!this.props.listingJson && (
+          <Header classes={['section-header-small']} bgColor="black">
+            <h1>{this.state.name}</h1>
+            <h3 className="subtitle">{this.state.category}</h3>
+            <SectionSeparator/>
+          </Header>
+        )}
+        {this.state.step === this.STEP.METAMASK && <StaticModal backdrop="static" isOpen={true}>
           <div className="image-container">
             <img src="/images/spinner-animation.svg" alt=""/>
           </div>
           Confirm transaction<br/>
           Press &ldquo;Submit&rdquo; in MetaMask window
-        </SimpleModal>}
-        {this.state.step === this.STEP.PROCESSING && <SimpleModal backdrop="static" isOpen={true}>
+        </StaticModal>}
+        {this.state.step === this.STEP.PROCESSING && <StaticModal backdrop="static" isOpen={true}>
           <div className="image-container">
             <img src="/images/spinner-animation.svg" alt=""/>
           </div>
           Processing your purchase<br/>
           Please stand by...
-        </SimpleModal>}
-        {this.state.step === this.STEP.PURCHASED && <SimpleModal backdrop="static" isOpen={true}>
+        </StaticModal>}
+        {this.state.step === this.STEP.PURCHASED && <StaticModal backdrop="static" isOpen={true}>
           <div className="image-container">
             <img src="/images/circular-check-button.svg" alt=""/>
           </div>
@@ -123,7 +118,7 @@ class ListingsDetail extends Component {
           <a onClick={() => window.location.reload()}>
             Reload page
           </a>
-        </SimpleModal>}
+        </StaticModal>}
         {this.state.pictures && <div className="carousel">
           {this
             .state

@@ -1,4 +1,5 @@
 @import 'https://use.fontawesome.com/releases/v5.0.9/css/all.css';
+@import 'assets/css/variables.css';
 /*      light colors         */
 html {
   font-size: 14px;
@@ -2424,12 +2425,12 @@ a.carousel-control span.fa {
 }
 
 .section-header,
-.section-header-blog,
+.section-header-small,
 .section-presentation-page {
   padding: 0;
 }
 .section-header .container,
-.section-header-blog .container,
+.section-header-small .container,
 .section-presentation-page .container {
   z-index: 3;
   position: absolute;
@@ -2439,7 +2440,7 @@ a.carousel-control span.fa {
   top: 0;
 }
 .section-header .content,
-.section-header-blog .content,
+.section-header-small .content,
 .section-presentation-page .content {
   position: relative;
   color: white;
@@ -2454,19 +2455,19 @@ a.carousel-control span.fa {
   transform: translateY(-50%);
 }
 .section-header .btn,
-.section-header-blog .btn,
+.section-header-small .btn,
 .section-presentation-page .btn {
   text-shadow: none;
 }
 .section-header h1,
-.section-header-blog h1,
+.section-header-small h1,
 .section-presentation-page h1 {
   font-weight: 400;
   font-size: 3.6em;
   text-shadow: -2px 2px 0px rgba(0, 0, 0, 0.3), -2px 4px 2px rgba(0, 0, 0, 0.1);
 }
 .section-header h5,
-.section-header-blog h5,
+.section-header-small h5,
 .section-presentation-page h5 {
   font-size: 1.3em;
   margin: 0 auto .5em;
@@ -2475,26 +2476,26 @@ a.carousel-control span.fa {
   text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.5);
 }
 .section-header p,
-.section-header-blog p,
+.section-header-small p,
 .section-presentation-page p {
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin: 1em 0 0.5em;
 }
 .section-header p span,
-.section-header-blog p span,
+.section-header-small p span,
 .section-presentation-page p span {
   text-transform: lowercase;
 }
 .section-header .separator,
-.section-header-blog .separator,
+.section-header-small .separator,
 .section-presentation-page .separator {
   color: #fff;
   margin: 30px auto;
 }
 .section-header .separator.line-separator:before, .section-header .separator.line-separator:after,
-.section-header-blog .separator.line-separator:before,
-.section-header-blog .separator.line-separator:after,
+.section-header-small .separator.line-separator:before,
+.section-header-small .separator.line-separator:after,
 .section-presentation-page .separator.line-separator:before,
 .section-presentation-page .separator.line-separator:after {
   border-color: white;
@@ -3510,17 +3511,22 @@ body.noscroll {
 
 /* END PRICING PAGE */
 /*          BLOG POSTS PAGE             */
-.section-header-blog {
+.section-header-small {
   padding: 0;
 }
-.section-header-blog .text-white {
+.section-header-small .text-white {
   color: #fff;
 }
 
-.section-header-blog .parallax,
+.section-header-small .parallax,
 .section-header-about .parallax,
 .section-presentation-page .parallax {
   height: 70vh;
+}
+
+.section.section-30-vh .parallax {
+  height: 40vh !important;
+  min-height: 30vh !important;
 }
 
 .section-card-blog {

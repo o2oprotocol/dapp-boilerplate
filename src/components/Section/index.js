@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import SectionSeparator from './SectionSeparator';
 
 class Section extends Component {
@@ -6,13 +6,15 @@ class Section extends Component {
     return (
       <div className="section">
         <div className="container">
-          <div className="row">
-            <div className="title-area">
-              <h2>{this.props.title}</h2>
-              {this.props.separator && <SectionSeparator />}
-              {this.props.description && <p className="description">{this.props.description}</p>}
+          {this.props.title && (
+            <div className="row">
+              <div className="title-area">
+                <h2>{this.props.title}</h2>
+                {this.props.separator && <SectionSeparator/>}
+                {this.props.description && <p className="description">{this.props.description}</p>}
+              </div>
             </div>
-          </div>
+          )}
           <div className="row">
             {this.props.children}
           </div>
