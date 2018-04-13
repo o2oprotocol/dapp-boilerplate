@@ -6,6 +6,8 @@ import alertify from 'alertifyjs';
 // temporary - we should be getting an o2oprotocol instance from our app, not
 // using a global singleton
 import o2oprotocol from 'core/o2oprotocol';
+import Header from 'components/Header';
+import SectionSeparator from 'components/Section/SectionSeparator';
 
 const SimpleModal = (props) => (
   <Modal show={true}>
@@ -94,6 +96,11 @@ class ListingsDetail extends Component {
       : this.state.price
     return (
       <div className="listing-detail">
+        <Header classes={['section-header-blog']} bgColor="black">
+          <h1>{this.state.name}</h1>
+          <h3 className="subtitle">{this.state.category}</h3>
+          <SectionSeparator />
+        </Header>
         {this.state.step === this.STEP.METAMASK && <SimpleModal backdrop="static" isOpen={true}>
           <div className="image-container">
             <img src="/images/spinner-animation.svg" alt=""/>

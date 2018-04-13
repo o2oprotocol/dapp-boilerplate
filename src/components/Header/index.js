@@ -1,28 +1,21 @@
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
-import SearchBox from 'components/SearchBox';
+import BgImage from 'components/BgImage';
 import HeaderBackground from 'assets/images/header-1.jpeg';
-import ImgBackground from './ImgBackground';
-
-const TitleArea = (props) => (
-  <div className="title-area">
-    <h1 className="title-modern">DApp Boilerplate</h1>
-    <h3>Probably the most value boilerplate in the world!</h3>
-    <div className="separator line-separator">♦</div>
-  </div>
-);
 
 class Header extends Component {
   render() {
+    const bgImage = this.props.bgImage || HeaderBackground;
+    const externalClasses = this.props.classes.join(' ');
+    const color = this.props.bgColor;
     return (
-      <div className="section section-header">
-        <div className="parallax filter filter-color-red">
-          <ImgBackground src={HeaderBackground}/>
+      <div className={`section ${externalClasses}`}>
+        <div className={`parallax filter filter-color-${color}`}>
+          <BgImage src={bgImage}/>
           <div className="container">
             <div className="content">
-              <TitleArea/>
-              <SearchBox onSearchClick={this.props.onSearchClick}/>
+              {this.props.children}
             </div>
           </div>
         </div>
@@ -32,7 +25,13 @@ class Header extends Component {
 }
 
 Header.propTypes = {
-  onSearchClick: PropTypes.func
+  classes: PropTypes.array,
+  bgColor: PropTypes.string
+};
+
+Header.defaultProps = {
+  classes: [],
+  bgColor: 'red'
 };
 
 export default Header;

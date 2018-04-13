@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class ImgBackground extends Component {
+class BgImage extends Component {
   render() {
     const bgStyle = {
       backgroundImage: `url("${this.props.src}")`
@@ -9,4 +9,4 @@ class ImgBackground extends Component {
   }
 }
 
-export default ImgBackground;
+export default BgImage;
