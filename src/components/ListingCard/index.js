@@ -3,8 +3,10 @@ import {Link} from 'react-router-dom';
 
 // temporary - we should be getting an o2oprotocol instance from our app, not
 // using a global singleton
-import o2oprotocol from 'core/o2oprotocol';
+// import o2oprotocol from 'core/o2oprotocol';
 import './index.css';
+
+const o2oprotocol = window.o2o;
 
 class ListingCard extends Component {
 

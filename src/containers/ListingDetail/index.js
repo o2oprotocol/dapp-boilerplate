@@ -45,7 +45,7 @@ class ListingsDetail extends Component {
         .getByIndex(this.props.listingId)
       this.setState(listing)
     } catch (error) {
-      alertify.log('There was an error loading this listing.')
+      alertify.notify('There was an error loading this listing.')
       console.error(`Error fetching contract or IPFS info for listingId: ${this.props.listingId}`)
     }
   }
@@ -77,7 +77,7 @@ class ListingsDetail extends Component {
       this.setState({step: this.STEP.PURCHASED})
     } catch (error) {
       console.log(error)
-      alertify.log("There was a problem purchasing this listing.\nSee the console for more details.")
+      alertify.notify("There was a problem purchasing this listing.\nSee the console for more details.")
       this.setState({step: this.STEP.VIEW})
     }
   }

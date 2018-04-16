@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 import alertify from 'alertifyjs';
 
-import o2oprotocol from 'core/o2oprotocol';
+// import o2oprotocol from 'core/o2oprotocol';
 import ListingDetail from 'containers/ListingDetail';
 import StaticModal from 'components/StaticModal';
 import Section from 'components/Section';
@@ -13,6 +13,8 @@ import StepLayout from './StepLayout';
 import InfoBox from './InfoBox';
 
 import './index.css';
+
+let o2oprotocol = {};
 
 class ListingCreate extends Component {
 
@@ -88,6 +90,10 @@ class ListingCreate extends Component {
       .bind(this);
   }
 
+  componentDidMount() {
+    o2oprotocol = window.o2o;
+  }
+
   handleSchemaSelection() {
     fetch(`/schemas/${this.state.selectedSchemaType}.json`).then((response) => response.json()).then((schemaJson) => {
       this.setState({selectedSchema: schemaJson, schemaFetched: true, step: this.STEP.DETAILS})
@@ -121,7 +127,7 @@ class ListingCreate extends Component {
       return bytes
     }
     if (roughSizeOfObject(formListing.formData) > this.MAX_UPLOAD_BYTES) {
-      alertify.log("Your listing is too large. Consider using fewer or smaller photos.")
+      alertify.notify("Your listing is too large. Consider using fewer or smaller photos.")
     } else {
       this.setState({formListing: formListing, step: this.STEP.PREVIEW})
       window.scrollTo(0, 0)
@@ -141,12 +147,14 @@ class ListingCreate extends Component {
         .contractService
         .waitTransactionFinished(transactionReceipt.tx)
       console.log('>>> onSubmitListing >>> ', blockNumber);
-      this.setState({step: this.STEP.SUCCESS})
+      // this.setState({step: this.STEP.SUCCESS}) // TODO: Comment for testing
     } catch (error) {
       // TODO: We need a failure step to go to here
       console.error(error)
-      alertify.log(error.message)
+      alertify.notify(error.message)
     }
+
+    this.setState({step: this.STEP.SUCCESS}) // TODO: Add for testing.
   }
 
   renderPickSchema() {

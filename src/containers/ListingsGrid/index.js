@@ -3,8 +3,10 @@ import {withRouter} from 'react-router';
 import Pagination from 'react-js-pagination';
 import alertify from 'alertifyjs';
 
-import o2oprotocol from 'core/o2oprotocol';
+// import o2oprotocol from 'core/o2oprotocol';
 import ListingCard from 'components/ListingCard';
+
+let o2oprotocol = {};
 
 class ListingsGrid extends Component {
 
@@ -19,6 +21,8 @@ class ListingsGrid extends Component {
   }
 
   update() {
+    o2oprotocol = window.o2o;
+    console.log('>>> ', o2oprotocol, ' >> windows > ', window.o2o);
     this.handlePageChange = this
       .handlePageChange
       .bind(this)
@@ -45,7 +49,8 @@ class ListingsGrid extends Component {
     // o2oprotocol.listings.allIds()
     const allListingsPromise = o2oprotocol
       .listings
-      .findIds({query: this.props.query})
+      // .findIds({query: this.props.query})
+      .allIds()
       .then((response) => {
         this.setState({contractFound: true})
         return response
