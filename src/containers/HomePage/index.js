@@ -26,6 +26,7 @@ const HomePageHeader = (props) => (
 class HomePage extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       products: []
     };

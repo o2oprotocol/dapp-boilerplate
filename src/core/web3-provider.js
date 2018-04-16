@@ -147,7 +147,7 @@ class Web3Provider extends Component {
     curr = curr && curr.toLowerCase()
 
     if (curr !== next) {
-      curr && alertify.notify('MetaMask account has changed.')
+      curr && alertify.warning('MetaMask account has changed.')
 
       this.setState({ accountsError: null, accounts })
     }

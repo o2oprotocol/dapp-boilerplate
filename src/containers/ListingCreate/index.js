@@ -127,7 +127,7 @@ class ListingCreate extends Component {
       return bytes
     }
     if (roughSizeOfObject(formListing.formData) > this.MAX_UPLOAD_BYTES) {
-      alertify.notify("Your listing is too large. Consider using fewer or smaller photos.")
+      alertify.warning("Your listing is too large. Consider using fewer or smaller photos.")
     } else {
       this.setState({formListing: formListing, step: this.STEP.PREVIEW})
       window.scrollTo(0, 0)
@@ -143,18 +143,16 @@ class ListingCreate extends Component {
         .create(formListing.formData, selectedSchemaType)
       this.setState({step: this.STEP.PROCESSING})
       // Submitted to blockchain, now wait for confirmation
-      const blockNumber = await o2oprotocol
-        .contractService
-        .waitTransactionFinished(transactionReceipt.tx)
-      console.log('>>> onSubmitListing >>> ', blockNumber);
-      // this.setState({step: this.STEP.SUCCESS}) // TODO: Comment for testing
+      // const blockNumber = await o2oprotocol
+      //   .contractService
+      //   .waitTransactionFinished(transactionReceipt.tx)
+      console.log('>>> transactionReceipt >>> ', transactionReceipt);
+      this.setState({step: this.STEP.SUCCESS})
     } catch (error) {
       // TODO: We need a failure step to go to here
       console.error(error)
-      alertify.notify(error.message)
+      alertify.error(error.message)
     }
-
-    this.setState({step: this.STEP.SUCCESS}) // TODO: Add for testing.
   }
 
   renderPickSchema() {
@@ -242,7 +240,7 @@ class ListingCreate extends Component {
     return (
       <div>
         {this.state.step === this.STEP.METAMASK && (
-          <StaticModal backdrop="static" isOpen={true}>
+          <StaticModal show={true}>
             <div className="image-container">
               <img src="/images/spinner-animation.svg" alt=""/>
             </div>
@@ -251,7 +249,7 @@ class ListingCreate extends Component {
           </StaticModal>
         )}
         {this.state.step === this.STEP.PROCESSING && (
-          <StaticModal backdrop="static" isOpen={true}>
+          <StaticModal show={true}>
             <div className="image-container">
               <img src="/images/spinner-animation.svg" alt=""/>
             </div>
@@ -260,7 +258,7 @@ class ListingCreate extends Component {
           </StaticModal>
         )}
         {this.state.step === this.STEP.SUCCESS && (
-          <StaticModal backdrop="static" isOpen={true}>
+          <StaticModal show={true}>
             <div className="image-container">
               <img src="/images/circular-check-button.svg" alt=""/>
             </div>

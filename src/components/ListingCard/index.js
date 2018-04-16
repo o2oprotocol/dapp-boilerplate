@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 // import o2oprotocol from 'core/o2oprotocol';
 import './index.css';
 
-const o2oprotocol = window.o2o;
+let o2oprotocol = {};
 
 class ListingCard extends Component {
 
@@ -23,13 +23,15 @@ class ListingCard extends Component {
   }
 
   async componentDidMount() {
+    o2oprotocol = window.o2o;
+    console.log('>>> ', o2oprotocol)
     try {
       const listing = await o2oprotocol
         .listings
         .getByIndex(this.props.listingId);
       this.setState(listing);
     } catch (error) {
-      console.error(`Error fetching contract or IPFS info for listingId: ${this.props.listingId}`);
+      console.error(`Error fetching contract or IPFS info for listingId: ${this.props.listingId} > `, error);
     }
   }
 

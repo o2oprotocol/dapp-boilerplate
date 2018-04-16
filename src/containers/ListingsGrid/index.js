@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {withRouter} from 'react-router';
 import Pagination from 'react-js-pagination';
 import alertify from 'alertifyjs';
+import PropTypes from 'prop-types';
 
-// import o2oprotocol from 'core/o2oprotocol';
 import ListingCard from 'components/ListingCard';
 
 let o2oprotocol = {};
@@ -11,7 +11,7 @@ let o2oprotocol = {};
 class ListingsGrid extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       contractFound: null,
@@ -80,7 +80,9 @@ class ListingsGrid extends Component {
   }
 
   componentDidMount() {
-    this.update()
+    const { blockchain } = this.context;
+    console.log('componentDidMount >>> ', blockchain);
+    // this.update()
   }
 
   handlePageChange(pageNumber) {
@@ -137,5 +139,9 @@ class ListingsGrid extends Component {
     )
   }
 }
+
+ListingsGrid.contextTypes = {
+  blockchain: PropTypes.object
+};
 
 export default withRouter(ListingsGrid);
