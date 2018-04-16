@@ -40,7 +40,7 @@ class TransactionCard extends Component {
         <div className="card-body d-flex flex-column flex-lg-row">
           <div className="image-container">
             <Link to={`/my-${perspective === "buyer" ? "purchases" : "listings"}/${_id}`}>
-              <img role="presentation" className={"cardThumbnail"} />
+              <img alt="" className={"cardThumbnail"} />
             </Link>
           </div>
           {perspective === "buyer" && (

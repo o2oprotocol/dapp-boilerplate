@@ -9,7 +9,7 @@ class InfoBox extends Component {
         <div className="info-box-image"><img
           className="d-none d-md-block"
           src="/images/features-graphic.svg"
-          role="presentation"/></div>
+          alt=""/></div>
       </div>
     );
   }

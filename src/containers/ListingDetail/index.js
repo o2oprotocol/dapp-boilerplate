@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 
-import {Modal} from 'react-bootstrap';
 import alertify from 'alertifyjs';
 
 // temporary - we should be getting an o2oprotocol instance from our app, not

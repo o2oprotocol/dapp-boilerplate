@@ -39,7 +39,7 @@ class MyPurchases extends Component {
       <div className='my-listings-wrapper'>
         <Header classes={['section-header-small', 'section-30-vh']} bgColor="black">
           <h1>My Purchases</h1>
-          <h3 className="subtitle"></h3>
+          <h3 className="subtitle"> </h3>
           <SectionSeparator/>
         </Header>
         <div className='container'>

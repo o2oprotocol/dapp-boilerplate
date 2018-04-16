@@ -232,12 +232,12 @@ class Profile extends Component {
                 <div className="detail">
                   <p>Transaction History:</p>
                   <p>
-                    <a href="#">ETH</a> | <a href="#">Tokens</a>
+                    <a href="">ETH</a> | <a href="">Tokens</a>
                   </p>
                 </div>
                 <div>
                   <p>
-                    <a href="#">View My Listings &gt;</a>
+                    <a href="">View My Listings &gt;</a>
                   </p>
                 </div>
               </div>
@@ -296,7 +296,7 @@ class Profile extends Component {
         </SimpleModal>
         <SimpleModal isOpen={this.state.modalsOpen.twitter} data-modal="twitter" handleToggle={this.handleToggle}>
           <div className="image-container">
-            <img src="/images/twitter-icon.svg" role="presentation" />
+            <img src="/images/twitter-icon.svg" alt="" />
           </div>
           <h2>Verify your Twitter Account</h2>
           <label htmlFor="twitter">Twitter Username</label>

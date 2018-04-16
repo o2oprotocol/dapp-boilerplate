@@ -184,12 +184,12 @@ class ListingCreate extends Component {
     const DefaultInfoBox = (
       <InfoBox title='How it works'>
         <p>O2OProtocol uses a Mozilla project called</p>
-        <a href="http://json-schema.org/" target="_blank">JSONSchema</a>
+        <a href="http://json-schema.org/">JSONSchema</a>
         to validate your listing according to standard rules. This standardization is
         key to allowing unaffiliated entities to read and write to the same data layer.<br/><br/>Be
           sure to give your listing an appropriate title and description that will inform
           others as to what you’re offering.<br/><br/>
-        <a href={`/schemas/${this.state.selectedSchemaType}.json`} target="_blank">View the
+        <a href={`/schemas/${this.state.selectedSchemaType}.json`}>View the
           <code>{this.state.selectedSchema.name}</code>
           schema</a>
       </InfoBox>
@@ -224,7 +224,7 @@ class ListingCreate extends Component {
       <InfoBox title='What happens next?'>
         <p>When you hit submit, a JSON object representing your listing will be
           published to</p>
-        <a target="_blank" href="https://ipfs.io">IPFS</a>
+        <a href="https://ipfs.io">IPFS</a>
         and the content hash will be published to a listing smart contract running on
         the Ethereum network.<br/><br/>Please
           review your listing before submitting. Your listing will appear to others just
@@ -236,7 +236,7 @@ class ListingCreate extends Component {
         {this.state.step === this.STEP.METAMASK && (
           <StaticModal backdrop="static" isOpen={true}>
             <div className="image-container">
-              <img src="/images/spinner-animation.svg" role="presentation"/>
+              <img src="/images/spinner-animation.svg" alt=""/>
             </div>
             Confirm transaction<br/>
             Press &ldquo;Submit&rdquo; in MetaMask window
@@ -245,7 +245,7 @@ class ListingCreate extends Component {
         {this.state.step === this.STEP.PROCESSING && (
           <StaticModal backdrop="static" isOpen={true}>
             <div className="image-container">
-              <img src="/images/spinner-animation.svg" role="presentation"/>
+              <img src="/images/spinner-animation.svg" alt=""/>
             </div>
             Uploading your listing<br/>
             Please stand by...
@@ -254,7 +254,7 @@ class ListingCreate extends Component {
         {this.state.step === this.STEP.SUCCESS && (
           <StaticModal backdrop="static" isOpen={true}>
             <div className="image-container">
-              <img src="/images/circular-check-button.svg" role="presentation"/>
+              <img src="/images/circular-check-button.svg" alt=""/>
             </div>
             Success<br/>
             <Link to="/">See All Listings</Link>

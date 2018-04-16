@@ -194,17 +194,17 @@ class TransactionDetail extends Component {
                         <span className="progress-circle checked" />Purchased
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           0x56Be343B94f860124dC4fEe278FDCBD38C102D88
                         </a>
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           {buyer.address}
                         </a>
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           {seller.address}
                         </a>
                       </td>
@@ -216,17 +216,17 @@ class TransactionDetail extends Component {
                         <span className="progress-circle checked" />Sent by seller
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           0x78Be343B94f860124dC4fEe278FDCBD38C102D88
                         </a>
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           {seller.address}
                         </a>
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           {buyer.address}
                         </a>
                       </td>
@@ -238,17 +238,17 @@ class TransactionDetail extends Component {
                         <span className="progress-circle checked" />Received by buyer
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           0x90Be343B94f860124dC4fEe278FDCBD38C102D88
                         </a>
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           {buyer.address}
                         </a>
                       </td>
                       <td>
-                        <a href="#" onClick={() => alert("To Do")}>
+                        <a href="" onClick={() => alert("To Do")}>
                           {seller.address}
                         </a>
                       </td>
