@@ -2,11 +2,11 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
 import BgImage from 'components/BgImage';
-import HeaderBackground from 'assets/images/banner.png';
+// import HeaderBackground from 'assets/images/banner.png';
 
 class Header extends Component {
   render() {
-    const bgImage = this.props.bgImage || HeaderBackground;
+    // const bgImage = this.props.bgImage || HeaderBackground;
     const externalClasses = this.props.classes.join(' ');
     const color = this.props.bgColor;
     return (

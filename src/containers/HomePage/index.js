@@ -6,8 +6,9 @@ import Listings from 'containers/ListingsGrid';
 import Section from 'components/Section';
 import Header from 'components/Header';
 import SearchBox from 'components/SearchBox';
-import HeaderBackground from 'assets/images/banner.png';
+// import HeaderBackground from 'assets/images/banner.png';
 
+/**
 const TitleArea = (props) => (
   <div className="title-area">
     <h1 className="title-modern">Blockchain DApp</h1>
@@ -15,6 +16,7 @@ const TitleArea = (props) => (
     <div className="separator line-separator">♦</div>
   </div>
 );
+*/
 
 /** 
 const HomePageHeader = (props) => (
