@@ -8,6 +8,7 @@ import Header from 'components/Header';
 import SearchBox from 'components/SearchBox';
 import HeaderBackground from 'assets/images/banner.png';
 
+/** 
 const TitleArea = (props) => (
   <div className="title-area">
     <h1 className="title-modern">Blockchain DApp</h1>
@@ -15,6 +16,7 @@ const TitleArea = (props) => (
     <div className="separator line-separator">♦</div>
   </div>
 );
+*/
 
 /** 
 const HomePageHeader = (props) => (
@@ -26,7 +28,7 @@ const HomePageHeader = (props) => (
 */
 
 const HomePageHeader = (props) => (
-  <Header classes={["section-header"]}>
+  <Header bgImage={HeaderBackground} classes={["section-header"]}>
     <SearchBox onSearchClick={props.onSearchClick}/>
   </Header>
 );
