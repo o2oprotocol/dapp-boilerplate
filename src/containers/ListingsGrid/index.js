@@ -32,7 +32,7 @@ class ListingsGrid extends Component {
           resolve(netId)
         })
     }).then((networkId) => {
-      return fetch(`https://raw.githubusercontent.com/o2oprotocol/demo-dapp/hide_list/hidelist_${networkId}.json`)
+      return fetch(`https://raw.githubusercontent.com/o2oprotocol/dapp-boilerplate/master/public/hide_list/hidelist_${networkId}.json`)
     }).then((response) => {
       if (response.status === 404) {
         return [] // Default: Don't hide anything
