@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 import alertify from 'alertifyjs';
+import PropTypes from 'prop-types';
 
-// import o2oprotocol from 'core/o2oprotocol';
 import ListingDetail from 'containers/ListingDetail';
 import StaticModal from 'components/StaticModal';
 import Section from 'components/Section';
@@ -13,8 +13,6 @@ import StepLayout from './StepLayout';
 import InfoBox from './InfoBox';
 
 import './index.css';
-
-let o2oprotocol = {};
 
 class ListingCreate extends Component {
 
@@ -91,7 +89,7 @@ class ListingCreate extends Component {
   }
 
   componentDidMount() {
-    o2oprotocol = window.o2o;
+    this.o2oprotocol = this.context.o2oprotocol;
   }
 
   handleSchemaSelection() {
@@ -138,15 +136,15 @@ class ListingCreate extends Component {
     try {
       console.log(formListing)
       this.setState({step: this.STEP.METAMASK})
-      const transactionReceipt = await o2oprotocol
+      const transactionReceipt = await this.o2oprotocol
         .listings
         .create(formListing.formData, selectedSchemaType)
       this.setState({step: this.STEP.PROCESSING})
       // Submitted to blockchain, now wait for confirmation
-      // const blockNumber = await o2oprotocol
-      //   .contractService
-      //   .waitTransactionFinished(transactionReceipt.tx)
-      console.log('>>> transactionReceipt >>> ', transactionReceipt);
+      const blockNumber = await this.o2oprotocol
+        .contractService
+        .waitTransactionFinished(transactionReceipt.tx)
+      console.log('>>> blockNumber >>> ', blockNumber);
       this.setState({step: this.STEP.SUCCESS})
     } catch (error) {
       // TODO: We need a failure step to go to here
@@ -309,5 +307,9 @@ class ListingCreate extends Component {
     )
   }
 }
+
+ListingCreate.contextTypes = {
+  o2oprotocol: PropTypes.object
+};
 
 export default ListingCreate;

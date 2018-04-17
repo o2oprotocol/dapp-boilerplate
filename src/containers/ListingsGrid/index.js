@@ -6,8 +6,6 @@ import PropTypes from 'prop-types';
 
 import ListingCard from 'components/ListingCard';
 
-let o2oprotocol = {};
-
 class ListingsGrid extends Component {
 
   constructor(props) {
@@ -21,8 +19,6 @@ class ListingsGrid extends Component {
   }
 
   update() {
-    o2oprotocol = window.o2o;
-    console.log('>>> ', o2oprotocol, ' >> windows > ', window.o2o);
     this.handlePageChange = this
       .handlePageChange
       .bind(this)
@@ -45,11 +41,10 @@ class ListingsGrid extends Component {
       }
     })
 
-    // Get all listings from contract const allListingsPromise =
-    // o2oprotocol.listings.allIds()
+    const { o2oprotocol } = this.context;
+
     const allListingsPromise = o2oprotocol
       .listings
-      // .findIds({query: this.props.query})
       .allIds()
       .then((response) => {
         this.setState({contractFound: true})
@@ -80,9 +75,7 @@ class ListingsGrid extends Component {
   }
 
   componentDidMount() {
-    const { blockchain } = this.context;
-    console.log('componentDidMount >>> ', blockchain);
-    // this.update()
+    this.update()
   }
 
   handlePageChange(pageNumber) {
@@ -141,7 +134,7 @@ class ListingsGrid extends Component {
 }
 
 ListingsGrid.contextTypes = {
-  blockchain: PropTypes.object
+  o2oprotocol: PropTypes.object
 };
 
 export default withRouter(ListingsGrid);

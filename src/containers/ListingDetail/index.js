@@ -1,18 +1,18 @@
 import React, {Component} from 'react';
-
 import alertify from 'alertifyjs';
+import PropTypes from 'prop-types';
 
-// temporary - we should be getting an o2oprotocol instance from our app, not
-// using a global singleton
-import o2oprotocol from 'core/o2oprotocol';
 import Header from 'components/Header';
 import StaticModal from 'components/StaticModal';
 import SectionSeparator from 'components/Section/SectionSeparator';
+import FaceImg from 'assets/images/face_5.jpg';
+
+import './index.css';
 
 class ListingsDetail extends Component {
 
   constructor(props) {
-    super(props)
+    super(props);
 
     this.STEP = {
       VIEW: 1,
@@ -40,7 +40,8 @@ class ListingsDetail extends Component {
 
   async loadListing() {
     try {
-      const listing = await o2oprotocol
+      const listing = await this
+        .o2oprotocol
         .listings
         .getByIndex(this.props.listingId)
       this.setState(listing)
@@ -51,6 +52,7 @@ class ListingsDetail extends Component {
   }
 
   componentWillMount() {
+    this.o2oprotocol = this.context.o2oprotocol;
     if (this.props.listingId) {
       // Load from IPFS
       this.loadListing()
@@ -65,12 +67,14 @@ class ListingsDetail extends Component {
     const totalPrice = (unitsToBuy * this.state.price)
     this.setState({step: this.STEP.METAMASK})
     try {
-      const transactionReceipt = await o2oprotocol
+      const transactionReceipt = await this
+        .o2oprotocol
         .listings
         .buy(this.state.address, unitsToBuy, totalPrice)
       console.log("Purchase request sent.")
       this.setState({step: this.STEP.PROCESSING})
-      const blockNumber = await o2oprotocol
+      const blockNumber = await this
+        .o2oprotocol
         .contractService
         .waitTransactionFinished(transactionReceipt.tx)
       console.log('>>> handleBuyClicked >>> ', blockNumber);
@@ -82,12 +86,9 @@ class ListingsDetail extends Component {
     }
   }
 
-  render() {
-    const price = typeof this.state.price === 'string'
-      ? 0
-      : this.state.price
+  renderModalIfThereIs() {
     return (
-      <div className="listing-detail">
+      <div>
         {!this.props.listingJson && (
           <Header classes={['section-header-small']} bgColor="black">
             <h1>{this.state.name}</h1>
@@ -95,98 +96,143 @@ class ListingsDetail extends Component {
             <SectionSeparator/>
           </Header>
         )}
-        {this.state.step === this.STEP.METAMASK && <StaticModal backdrop="static" isOpen={true}>
-          <div className="image-container">
-            <img src="/images/spinner-animation.svg" alt=""/>
-          </div>
-          Confirm transaction<br/>
-          Press &ldquo;Submit&rdquo; in MetaMask window
-        </StaticModal>}
-        {this.state.step === this.STEP.PROCESSING && <StaticModal backdrop="static" isOpen={true}>
-          <div className="image-container">
-            <img src="/images/spinner-animation.svg" alt=""/>
-          </div>
-          Processing your purchase<br/>
-          Please stand by...
-        </StaticModal>}
-        {this.state.step === this.STEP.PURCHASED && <StaticModal backdrop="static" isOpen={true}>
-          <div className="image-container">
-            <img src="/images/circular-check-button.svg" alt=""/>
-          </div>
-          Purchase was successful.<br/>
-          <a onClick={() => window.location.reload()}>
-            Reload page
-          </a>
-        </StaticModal>}
-        {this.state.pictures && <div className="carousel">
-          {this
-            .state
-            .pictures
-            .map(pictureUrl => (
-              <div className="photo" key={pictureUrl}>
-                {(new URL(pictureUrl).protocol === "data:") && <img src={pictureUrl} alt=""/>}
-              </div>
-            ))}
-        </div>}
-        <div className="container listing-container">
-          <div className="row">
-            <div className="col-12 col-md-8 detail-info-box">
-              <div className="category">{this.state.category}</div>
-              <div className="title">{this.state.name}</div>
-              <div className="description">{this.state.description}</div>
-              <div className="category">Seller</div>
-              <div className="description">{this.state.sellerAddress}</div>
-              <a
-                href={o2oprotocol
-                .ipfsService
-                .gatewayUrlForHash(this.state.ipfsHash)}
-                target="_blank">
-                View on IPFS
-                <big>&rsaquo;</big>
-              </a>
-              <div className="debug">
-                <li>IPFS: {this.state.ipfsHash}</li>
-                <li>Seller: {this.state.sellerAddress}</li>
-                <li>Units: {this.state.unitsAvailable}</li>
+        {this.state.step === this.STEP.METAMASK && (
+          <StaticModal show={true}>
+            <div className="image-container">
+              <img src="/images/spinner-animation.svg" alt=""/>
+            </div>
+            Confirm transaction<br/>
+            Press &ldquo;Submit&rdquo; in MetaMask window
+          </StaticModal>
+        )}
+        {this.state.step === this.STEP.PROCESSING && (
+          <StaticModal show={true}>
+            <div className="image-container">
+              <img src="/images/spinner-animation.svg" alt=""/>
+            </div>
+            Processing your purchase<br/>
+            Please stand by...
+          </StaticModal>
+        )}
+        {this.state.step === this.STEP.PURCHASED && (
+          <StaticModal show={true}>
+            <div className="image-container">
+              <img src="/images/circular-check-button.svg" alt=""/>
+            </div>
+            Purchase was successful.<br/>
+            <a onClick={() => window.location.reload()}>
+              Reload page
+            </a>
+          </StaticModal>
+        )}
+      </div>
+    );
+  }
+
+  renderDetail() {
+    const price = typeof this.state.price === 'string'
+      ? 0
+      : this.state.price;
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-md-8">
+            <div className="content-blog">
+              {this.state.pictures && (
+                <div className="carousel">
+                  {this
+                    .state
+                    .pictures
+                    .map(pictureUrl => (
+                      <div className="photo" key={pictureUrl}>
+                        {(new URL(pictureUrl).protocol === "data:") && <img src={pictureUrl} alt=""/>}
+                      </div>
+                    ))}
+                </div>
+              )}
+              <div className="description">
+                <div className="container listing-container">
+                  <div className="row">
+                    <div className="col-12 col-md-8 detail-info-box">
+                      <div className="title">{this.state.name}</div>
+                      <div className="description">{this.state.description}</div>
+                      <div className="category">Seller</div>
+                      <div className="description">{this.state.sellerAddress}</div>
+                      <a
+                        href={this
+                        .o2oprotocol
+                        .ipfsService
+                        .gatewayUrlForHash(this.state.ipfsHash)}
+                        target="_blank">
+                        View on IPFS
+                        <big>&rsaquo;</big>
+                      </a>
+                      <div className="debug">
+                        <li>IPFS: {this.state.ipfsHash}</li>
+                        <li>Seller: {this.state.sellerAddress}</li>
+                        <li>Units: {this.state.unitsAvailable}</li>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
-            <div className="col-12 col-md-4">
-              <div className="buy-box">
-                <div>
-                  <span>Price</span>
-                  <span className="price">
-                    {Number(price).toLocaleString(undefined, {minimumFractionDigits: 3})}
-                    ETH
-                  </span>
-                </div>
-                {(this.state.unitsAvailable > 1) && <div>
-                  <span>Units Available</span>
-                  <span className="price">{this
-                      .state
-                      .unitsAvailable
-                      .toLocaleString()}</span>
-                </div>}
-                <div>
-                  {(this.props.listingId) && ((this.state.unitsAvailable > 0)
-                    ? <button
-                        className="button"
-                        onClick={this.handleBuyClicked}
-                        disabled={!this.props.listingId}
-                        onMouseDown={e => e.preventDefault()}>
-                        Buy Now
-                      </button>
-                    : <div className="sold-banner">
-                      <img src="/images/sold-tag.svg" alt=""/>
-                      Sold
-                    </div>)}
-                </div>
+          </div>
+          <div className="col-md-3 col-md-offset-1 text-center">
+            <h3 className="social-title">Seller</h3>
+            <div className="author">
+              <div className="avatar avatar-danger">
+                <img alt={this.state.sellerAddress} src={FaceImg}/>
               </div>
+              <div className="description text-center">
+                <h3 className="big-text">{this.state.sellerAddress}</h3>
+              </div>
+            </div>
+            <h3 className="social-title">Categories</h3>
+            <span className="label label-fill label-danger">{this.state.category}</span>
+            <h3 className="scocial-title">Price</h3>
+            <span className="label label-fill label-info">{Number(price).toLocaleString(undefined, {minimumFractionDigits: 3})}
+              ETH</span>
+            {(this.state.unitsAvailable > 1) && (
+              <div>
+                <span>Units Available</span>
+                <span className="price">{this
+                    .state
+                    .unitsAvailable
+                    .toLocaleString()}</span>
+              </div>
+            )}
+            <div>
+              {(this.props.listingId) && ((this.state.unitsAvailable > 0)
+                ? <button
+                    className="button"
+                    onClick={this.handleBuyClicked}
+                    disabled={!this.props.listingId}
+                    onMouseDown={e => e.preventDefault()}>
+                    Buy Now
+                  </button>
+                : (
+                  <span className="label label-fill label-danger">Sold</span>
+                ))}
             </div>
           </div>
         </div>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <div className="listing-detail">
+        {this.renderModalIfThereIs()}
+        {this.renderDetail()}
+      </div >
     )
   }
 }
 
-export default ListingsDetail
+ListingsDetail.contextTypes = {
+  o2oprotocol: PropTypes.object
+};
+
+export default ListingsDetail;

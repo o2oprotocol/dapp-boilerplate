@@ -1,12 +1,8 @@
+import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 
-// temporary - we should be getting an o2oprotocol instance from our app, not
-// using a global singleton
-// import o2oprotocol from 'core/o2oprotocol';
 import './index.css';
-
-let o2oprotocol = {};
 
 class ListingCard extends Component {
 
@@ -18,18 +14,20 @@ class ListingCard extends Component {
       price: "Loading...",
       ipfsHash: null,
       lister: null,
-      unitsAvailable: null
+      unitsAvailable: null,
+      description: 'Loading...'
     }
   }
 
   async componentDidMount() {
-    o2oprotocol = window.o2o;
-    console.log('>>> ', o2oprotocol)
+    const {o2oprotocol} = this.context;
     try {
       const listing = await o2oprotocol
         .listings
         .getByIndex(this.props.listingId);
       this.setState(listing);
+      window.o2oprotocol = o2oprotocol;
+      console.log('>>> Listing > ', listing);
     } catch (error) {
       console.error(`Error fetching contract or IPFS info for listingId: ${this.props.listingId} > `, error);
     }
@@ -37,25 +35,39 @@ class ListingCard extends Component {
 
   render() {
     return (
-      <div className="col-12 col-md-6 col-lg-4 listing-card">
-        <Link to={`/listing/${this.props.listingId}`}>
-          <div
-            className="photo"
-            style={{
-            backgroundImage: `url("${ (this.state.pictures && this.state.pictures.length > 0 && (new URL(this.state.pictures[0])).protocol === "data:")
+      <div className="col-12 col-md-6 col-lg-4">
+        <div className="card card-blog">
+          <Link to={`/listing/${this.props.listingId}`} className="header">
+            <img
+              src={(this.state.pictures && this.state.pictures.length > 0 && (new URL(this.state.pictures[0])).protocol === "data:")
               ? this.state.pictures[0]
-              : '/images/default-image.jpg'}")`
-          }}></div>
-          <div className="category">{this.state.category}</div>
-          <div className="title">{this.state.name}</div>
-          <div className="price">
-            {Number(this.state.price).toLocaleString(undefined, {minimumFractionDigits: 3})}
-            ETH {this.state.unitsAvailable === 0 && <span className="sold-banner">Sold</span>}
+              : '/images/default-image.jpg'}
+              className="image-header" alt={this.state.name}></img>
+          </Link>
+          <div className="content">
+            <div className="circle-black">
+              <div className="circle">
+                <div className="date-wrapper">
+                  <span className="month">{Number(this.state.price).toLocaleString(undefined, {minimumFractionDigits: 3})}</span>
+                  <span className="date">ETH</span>
+                </div>
+              </div>
+            </div>
+            <a href="" className="card-title">
+              <h3>{this.state.name}</h3>
+            </a>
+            <h6 className="card-category text-warning">{this.state.category}</h6>
+            <p className="text-description text-gray">{this.state.description}</p>
           </div>
-        </Link>
+          {this.state.unitsAvailable === 0 && <div className="ribbon-wrapper-sold"><div className="ribbon-sold">SOLD</div></div>}
+        </div>
       </div>
     )
   }
 }
+
+ListingCard.contextTypes = {
+  o2oprotocol: PropTypes.object
+};
 
 export default ListingCard;

@@ -17,13 +17,12 @@ class O2OProtocolProvider extends Component {
   }
 
   initO2O(options) {
-    this.blockchain = new O2OProtocol(options);
+    this.o2oprotocol = new O2OProtocol(options);
     console.log('o2oprotocol was initialized!');
   }
 
   getChildContext() {
-    console.log('Hello >>> getChildContext >> ', this.blockchain)
-    return {blockchain: this.blockchain};
+    return {o2oprotocol: this.o2oprotocol};
   }
 
   render() {
@@ -36,7 +35,7 @@ class O2OProtocolProvider extends Component {
 }
 
 O2OProtocolProvider.childContextTypes = {
-  blockchain: PropTypes.object
+  o2oprotocol: PropTypes.object
 };
 
 export default O2OProtocolProvider;
