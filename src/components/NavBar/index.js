@@ -50,7 +50,7 @@ class NavBar extends Component {
               <span className="icon-bar bar3"/>
             </button>
             <a href="/" className="navbar-brand">
-              DApp Boilerplate
+              Blockchain DApp
             </a>
           </div>
           <div className="collapse navbar-collapse">

@@ -10,15 +10,23 @@ import HeaderBackground from 'assets/images/banner.png';
 
 const TitleArea = (props) => (
   <div className="title-area">
-    <h1 className="title-modern">DApp Boilerplate</h1>
+    <h1 className="title-modern">Blockchain DApp</h1>
     <h3>Probably the most value boilerplate in the world!</h3>
     <div className="separator line-separator">♦</div>
   </div>
 );
 
+/** 
 const HomePageHeader = (props) => (
   <Header bgImage={HeaderBackground} classes={["section-header"]}>
     <TitleArea/>
+    <SearchBox onSearchClick={props.onSearchClick}/>
+  </Header>
+);
+*/
+
+const HomePageHeader = (props) => (
+  <Header classes={["section-header"]}>
     <SearchBox onSearchClick={props.onSearchClick}/>
   </Header>
 );
