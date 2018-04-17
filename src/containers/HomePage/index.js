@@ -6,7 +6,7 @@ import Listings from 'containers/ListingsGrid';
 import Section from 'components/Section';
 import Header from 'components/Header';
 import SearchBox from 'components/SearchBox';
-import HeaderBackground from 'assets/images/header-1.jpeg';
+import HeaderBackground from 'assets/images/banner.png';
 
 const TitleArea = (props) => (
   <div className="title-area">

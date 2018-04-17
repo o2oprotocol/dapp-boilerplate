@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 
 import BgImage from 'components/BgImage';
-import HeaderBackground from 'assets/images/header-1.jpeg';
+import HeaderBackground from 'assets/images/banner.png';
 
 class Header extends Component {
   render() {
@@ -31,7 +31,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   classes: [],
-  bgColor: 'red'
+  bgColor: 'blue'
 };
 
 export default Header;

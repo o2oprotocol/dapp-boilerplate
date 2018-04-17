@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Header from 'components/Header';
 import StaticModal from 'components/StaticModal';
 import SectionSeparator from 'components/Section/SectionSeparator';
-import FaceImg from 'assets/images/face_5.jpg';
+import FaceImg from 'assets/images/avatar.png';
 
 import './index.css';
 
