@@ -194,7 +194,7 @@ class ListingsDetail extends Component {
             <span className="label label-fill label-info">{Number(price).toLocaleString(undefined, {minimumFractionDigits: 3})}
               ETH</span>
             {(this.state.unitsAvailable > 1) && (
-              <div>
+              <div style={{ marginBottom: '5px'}}>
                 <span>Units Available</span>
                 <span className="price">{this
                     .state
@@ -205,7 +205,7 @@ class ListingsDetail extends Component {
             <div>
               {(this.props.listingId) && ((this.state.unitsAvailable > 0)
                 ? <button
-                    className="button"
+                    className="btn btn-info btn-fill"
                     onClick={this.handleBuyClicked}
                     disabled={!this.props.listingId}
                     onMouseDown={e => e.preventDefault()}>

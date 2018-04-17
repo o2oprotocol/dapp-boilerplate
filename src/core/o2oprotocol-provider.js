@@ -8,9 +8,9 @@ class O2OProtocolProvider extends Component {
 
     const {web3} = window;
     const ipfsConfig = {
-      ipfsDomain: '172.16.20.121',
+      ipfsDomain: '52.198.14.106',
       ipfsApiPort: '5001',
-      ipfsGatewayPort: '8080',
+      ipfsGatewayPort: '8088',
       ipfsProtocol: 'http'
     };
     this.initO2O({web3, ipfsConfig});
