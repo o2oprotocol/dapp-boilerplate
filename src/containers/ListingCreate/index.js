@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import Form from 'react-jsonschema-form';
 import alertify from 'alertifyjs';
 import PropTypes from 'prop-types';
@@ -94,7 +94,7 @@ class ListingCreate extends Component {
 
   handleSchemaSelection() {
     fetch(`/schemas/${this.state.selectedSchemaType}.json`).then((response) => response.json()).then((schemaJson) => {
-      this.setState({selectedSchema: schemaJson, schemaFetched: true, step: this.STEP.DETAILS})
+      this.setState({ selectedSchema: schemaJson, schemaFetched: true, step: this.STEP.DETAILS })
       window.scrollTo(0, 0)
     })
   }
@@ -127,7 +127,7 @@ class ListingCreate extends Component {
     if (roughSizeOfObject(formListing.formData) > this.MAX_UPLOAD_BYTES) {
       alertify.warning("Your listing is too large. Consider using fewer or smaller photos.")
     } else {
-      this.setState({formListing: formListing, step: this.STEP.PREVIEW})
+      this.setState({ formListing: formListing, step: this.STEP.PREVIEW })
       window.scrollTo(0, 0)
     }
   }
@@ -135,19 +135,19 @@ class ListingCreate extends Component {
   async onSubmitListing(formListing, selectedSchemaType) {
     try {
       console.log(formListing)
-      this.setState({step: this.STEP.METAMASK})
+      this.setState({ step: this.STEP.METAMASK })
       const transactionReceipt = await this
         .o2oprotocol
         .listings
         .create(formListing.formData, selectedSchemaType)
-      this.setState({step: this.STEP.PROCESSING})
+      this.setState({ step: this.STEP.PROCESSING })
       // Submitted to blockchain, now wait for confirmation
       const blockNumber = await this
         .o2oprotocol
         .contractService
         .waitTransactionFinished(transactionReceipt.tx)
       console.log('>>> blockNumber >>> ', blockNumber);
-      this.setState({step: this.STEP.SUCCESS})
+      this.setState({ step: this.STEP.SUCCESS })
     } catch (error) {
       // TODO: We need a failure step to go to here
       console.error(error)
@@ -159,8 +159,8 @@ class ListingCreate extends Component {
     const info = {
       title: 'Choose a schema for your product or service',
       description: 'Your product or service will use a schema to describe its attributes like name, ' +
-          'description, and price. O2OProtocol already has multiple schemas that map to wel' +
-          'l-known categories of listings like housing, auto, and services.'
+        'description, and price. O2OProtocol already has multiple schemas that map to wel' +
+        'l-known categories of listings like housing, auto, and services.'
     };
     return (
       <StepLayout
@@ -168,17 +168,17 @@ class ListingCreate extends Component {
         title="What type of listing do you want to create?"
         info={info}
         onNextStepClick={this
-        .handleSchemaSelection
-        .bind(this)}>
+          .handleSchemaSelection
+          .bind(this)}>
         {this
           .schemaList
           .map(schema => (
             <div
               className={this.state.selectedSchemaType === schema.type
-              ? 'schema-selection selected'
-              : 'schema-selection'}
+                ? 'schema-selection selected'
+                : 'schema-selection'}
               key={schema.type}
-              onClick={() => this.setState({selectedSchemaType: schema.type})}>
+              onClick={() => this.setState({ selectedSchemaType: schema.type })}>
               {schema.name}
             </div>
           ))}
@@ -192,9 +192,9 @@ class ListingCreate extends Component {
         <p>O2OProtocol uses a Mozilla project called</p>
         <a href="http://json-schema.org/">JSONSchema</a>
         to validate your listing according to standard rules. This standardization is
-        key to allowing unaffiliated entities to read and write to the same data layer.<br/><br/>Be
+        key to allowing unaffiliated entities to read and write to the same data layer.<br /><br />Be
           sure to give your listing an appropriate title and description that will inform
-          others as to what you’re offering.<br/><br/>
+          others as to what you’re offering.<br /><br />
         <a href={`/schemas/${this.state.selectedSchemaType}.json`}>View the
           <code>{this.state.selectedSchema.name}</code>
           schema</a>
@@ -215,7 +215,7 @@ class ListingCreate extends Component {
             <button
               type="button"
               className="btn btn-other"
-              onClick={() => this.setState({step: this.STEP.PICK_SCHEMA})}>
+              onClick={() => this.setState({ step: this.STEP.PICK_SCHEMA })}>
               Back
             </button>
             <button type="submit" className="float-right btn btn-primary">Continue</button>
@@ -232,7 +232,7 @@ class ListingCreate extends Component {
           published to</p>
         <a href="https://ipfs.io">IPFS</a>
         and the content hash will be published to a listing smart contract running on
-        the Ethereum network.<br/><br/>Please
+        the Ethereum network.<br /><br />Please
           review your listing before submitting. Your listing will appear to others just
           as it looks on the window to the left.
       </InfoBox>
@@ -242,41 +242,42 @@ class ListingCreate extends Component {
         {this.state.step === this.STEP.METAMASK && (
           <StaticModal show={true}>
             <div className="image-container">
-              <img src="/images/spinner-animation.svg" alt=""/>
+              <img src="/images/spinner-animation.svg" alt="" />
             </div>
-            Confirm transaction<br/>
+            Confirm transaction<br />
             Press &ldquo;Submit&rdquo; in MetaMask window
           </StaticModal>
         )}
         {this.state.step === this.STEP.PROCESSING && (
           <StaticModal show={true}>
             <div className="image-container">
-              <img src="/images/spinner-animation.svg" alt=""/>
+              <img src="/images/spinner-animation.svg" alt="" />
             </div>
-            Uploading your listing<br/>
+            Uploading your listing<br />
             Please stand by...
           </StaticModal>
         )}
         {this.state.step === this.STEP.SUCCESS && (
           <StaticModal show={true}>
             <div className="image-container">
-              <img src="/images/circular-check-button.svg" alt=""/>
+              <img src="/images/circular-check-button.svg" alt="" />
             </div>
-            Success<br/>
+            Success<br />
             <Link to="/">See All Listings</Link>
           </StaticModal>
         )}
         <StepLayout
           step={this.state.step}
           title="Preview your listing"
-          infoBox={DefaultInfoBox}>
+          infoBox={DefaultInfoBox}
+          cols={{ left: 7, right: 4, offset: 1 }}>
           <div className="preview">
-            <ListingDetail listingJson={this.state.formListing.formData}/>
+            <ListingDetail listingJson={this.state.formListing.formData} />
           </div>
           <div className="btn-container">
             <button
               className="btn btn-other float-left"
-              onClick={() => this.setState({step: this.STEP.DETAILS})}>
+              onClick={() => this.setState({ step: this.STEP.DETAILS })}>
               Back
             </button>
             <button
@@ -296,7 +297,7 @@ class ListingCreate extends Component {
         <Header classes={['section-header-small', 'section-30-vh']} bgColor="black">
           <h1>Create Listing</h1>
           <h3 className="subtitle">Step {this.state.step}</h3>
-          <SectionSeparator/>
+          <SectionSeparator />
         </Header>
         <Section>
           <div className="container listing-form">

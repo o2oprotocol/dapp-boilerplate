@@ -4917,3 +4917,7 @@ body {
 .modal-dialog {
   padding-top: 40vh;
 }
+
+.btn-container button {
+  margin-right: 10px;
+}

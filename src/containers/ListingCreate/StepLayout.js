@@ -4,10 +4,12 @@ import InfoBox from './InfoBox';
 class StepLayout extends Component {
   render() {
     const {info, infoBox} = this.props;
+    const { cols = { left: 5, right: 5, offset: 2} } = this.props;
+
     return (
       <div className="step-container pick-schema">
         <div className="row flex-sm-row-reverse">
-          <div className="col-md-5">
+          <div className={`col-md-${cols.left}`}>
             <label>STEP {Number(this.props.step)}</label>
             <h2>{this.props.title}</h2>
             {this.props.children}
@@ -22,7 +24,7 @@ class StepLayout extends Component {
             )}
           </div>
 
-          <div className="col-md-5 col-md-offset-2">
+          <div className={`col-md-${cols.right} col-md-offset-${cols.offset}`}>
             {info && (
               <InfoBox title={info.title}>
                 <p>{info.description}</p>

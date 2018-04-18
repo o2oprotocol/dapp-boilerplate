@@ -232,9 +232,10 @@ class ListingsDetail extends Component {
     const {pictures} = this.state;
     const hasPicture = pictures && pictures.length > 0;
     const sold = this.state.unitsAvailable <= 0;
+    const embeded = this.props.listingJson ? true : false;
 
     return (
-      <div className="container item-detail">
+      <div className={`container item-detail ${embeded ? 'col-md-12' : ''}`}>
         <div className="row pad-tb-40">
           <div className="col-md-8 col-sm-12">
             <div className="content-wrapper">
