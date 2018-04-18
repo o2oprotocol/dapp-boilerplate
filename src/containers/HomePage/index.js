@@ -8,24 +8,6 @@ import Header from 'components/Header';
 import SearchBox from 'components/SearchBox';
 import HeaderBackground from 'assets/images/banner.png';
 
-/** 
-const TitleArea = (props) => (
-  <div className="title-area">
-    <h1 className="title-modern">Blockchain DApp</h1>
-    <h3>Probably the most value boilerplate in the world!</h3>
-    <div className="separator line-separator">♦</div>
-  </div>
-);
-*/
-
-/** 
-const HomePageHeader = (props) => (
-  <Header bgImage={HeaderBackground} classes={["section-header"]}>
-    <TitleArea/>
-    <SearchBox onSearchClick={props.onSearchClick}/>
-  </Header>
-);
-*/
 
 const HomePageHeader = (props) => (
   <Header bgImage={HeaderBackground} classes={["section-header"]}>
@@ -38,7 +20,8 @@ class HomePage extends Component {
     super(props);
 
     this.state = {
-      products: []
+      products: [],
+      listings: []
     };
     this.handleSearchClick = this
       .handleSearchClick
@@ -49,13 +32,17 @@ class HomePage extends Component {
     window.location.href = `/?q=${query}`
   }
 
+  handleOnSearch(listings) {
+    this.setState({ listings: listings });
+  }
+
   render() {
     const {q} = QueryString.parse(this.props.location.search)
     return (
       <div className="home">
         {!q && <HomePageHeader onSearchClick={this.handleSearchClick}/>}
-        <Section title={"Listings"} separator={true}>
-          <Listings query={q}/>
+        <Section title={`${this.state.listings.length} Listings`} separator={true}>
+          <Listings query={q} onSearch={this.handleOnSearch.bind(this)}/>
         </Section>
       </div>
     );

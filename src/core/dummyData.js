@@ -576,7 +576,7 @@ const findByProps = (_cats, props, res = []) => {
   return res;
 }
 
-const getCategories = ({lang, name, id}) => {
+const getCategories = ({lang, name, id, parent_id}) => {
   const _lang = lang ? lang : 'en';
   const _cat = categories[_lang];
   if (id) {
@@ -588,6 +588,10 @@ const getCategories = ({lang, name, id}) => {
   if (name) {
     const _cats = _cat['children'];
     return findByProps(_cats, { name: 'name', value: name });
+  }
+  if (parent_id) {
+    const _cats = _cat['children'];
+    return findByProps(_cats, { name: 'parent_id', value: parent_id });
   }
   return [];
 }
@@ -603,6 +607,7 @@ module.exports = {
   getProducts,
 }
 
-// const cats = getCategories({ name: 'Galaxy V' });
-// const prods = getProducts({ name: 'galaxy' });
+// const cats = getCategories({ parent_id: 'CATEGORY_TABLETS' });
+// const prods = getProducts({ name: 'galaxy', title: '' });
 // console.log(prods);
+// console.log(cats)

@@ -8,6 +8,7 @@ import HomePage from 'containers/HomePage';
 import ListingDetail from 'containers/ListingDetail';
 import ListingCreate from 'containers/ListingCreate';
 import MyPurchase from 'containers/MyPurchase';
+import MyListings from 'containers/MyListings';
 import Profile from 'components/Profile';
 import Notifications from 'components/Notifications';
 import TransactionDetail from 'components/TransactionDetail';
@@ -37,6 +38,7 @@ class App extends Component {
                 <Route path="/notifications" component={NotificationsPage}/>
                 <Route path="/my-purchases/:listingId" component={TransactionDetailPage}/>
                 <Route path="/my-purchases" component={MyPurchasePage}/>
+                <Route path="/my-listings" component={MyListings}/>
               </Switch>
             </O2OProtocolProvider>
           </Web3Provider>

@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import o2oprotocol from 'core/o2oprotocol';
 import React, {Component} from 'react';
 import {AsyncTypeahead} from 'react-bootstrap-typeahead';
 
@@ -9,15 +8,12 @@ import './index.css';
 const PERPAGE = 50;
 
 const makeAndHandleRequest = ({query}) => {
-  return o2oprotocol
-    .listings
-    .findListings({query})
+  return Promise
+    .resolve([])
     .then((listings) => {
-      const totalcount = o2oprotocol
-        .listings
-        .count()
+      const totalcount = 0;
       const options = listings.map(({_id, category}) => ({id: _id, title: category}));
-      return {options, totalcount}
+      return {options, totalcount};
     })
 }
 

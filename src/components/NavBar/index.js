@@ -6,15 +6,18 @@ class NavBar extends Component {
     super(props);
     this.state = {
       transparentClass: 'navbar-transparent',
-      allowTransparent: true
+      allowTransparent: true,
+      toggle: false
     };
     this.handleScroll = this
       .handleScroll
       .bind(this);
+    this.handleDocumentClick = this.handleDocumentClick.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('click', this.handleDocumentClick);
   }
 
   componentWillUnmount() {
@@ -30,12 +33,41 @@ class NavBar extends Component {
     });
   }
 
+  handleDocumentClick(event) {
+    if (this.state.toggle) {
+      this.toggleNavBar(!this.state.toggle);
+    }
+  }
+
+  handleNavBarToggle() {
+    const toggle = !this.state.toggle;
+    this.setState({ toggle: toggle });
+    this.toggleNavBar(toggle);
+  }
+
+  toggleNavBar(toggle) {
+    if (toggle) {
+      document.body.classList.add('nav-open');
+    } else {
+      document.body.classList.remove('nav-open');
+    }
+  }
+
+  handleNavClick(event) {
+    event.stopPropagation();
+  }
+
+  closeNav() {
+    this.toggleNavBar(false)
+  }
+
   render() {
     return (
       <nav
         className={`navbar navbar-default navbar-fixed-top ${this.state.allowTransparent
         ? this.state.transparentClass
-        : ''}`}>
+        : ''}`}
+        onClick={this.handleNavClick.bind(this)}>
         <div className="container">
           <div className="navbar-header">
             <button
@@ -43,7 +75,7 @@ class NavBar extends Component {
               type="button"
               className="navbar-toggle"
               data-toggle="collapse"
-              data-target="#example">
+              onClick={this.handleNavBarToggle.bind(this)}>
               <span className="sr-only">Toggle navigation</span>
               <span className="icon-bar bar1"/>
               <span className="icon-bar bar2"/>
@@ -55,13 +87,13 @@ class NavBar extends Component {
           </div>
           <div className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right navbar-uppercase">
-              <li>
+              <li onClick={this.closeNav.bind(this)}>
                 <Link to="/my-purchases" className="nav-item nav-link">My Purchases</Link>
               </li>
-              <li>
+              <li onClick={this.closeNav.bind(this)}>
                 <Link to="/my-listings" className="nav-item nav-link">My Listings</Link>
               </li>
-              <li>
+              <li onClick={this.closeNav.bind(this)}>
                 <Link to="/create" className="nav-item nav-link">
                   <i className="fa fa-plus-circle" style={{marginRight: '2px', fontSize: '13px'}}></i>
                   Add Listing

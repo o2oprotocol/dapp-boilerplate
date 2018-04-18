@@ -41,14 +41,15 @@ class ListingsGrid extends Component {
       }
     })
 
-    const { o2oprotocol } = this.context;
+    const {o2oprotocol} = this.context;
 
     const allListingsPromise = o2oprotocol
       .listings
       .allIds()
       .then((response) => {
-        this.setState({contractFound: true})
-        return response
+        this.setState({contractFound: true});
+        this.props.onSearch(response);
+        return response;
       })
       .catch((error) => {
         if (error.message.indexOf("(network/artifact mismatch)") > 0) {
@@ -104,7 +105,7 @@ class ListingsGrid extends Component {
     const showListingsIds = listingIds.slice(listingsPerPage * (activePage - 1), listingsPerPage * (activePage))
 
     return (
-      <div className="listings-wrapper">
+      <div className="listings-wrapper col-md-12">
         {contractFound === false && <div className="listings-grid">
           <div className="alert alert-warning" role="alert">
             The O2OProtocol Contract was not found on this network.<br/>
@@ -112,9 +113,6 @@ class ListingsGrid extends Component {
           </div>
         </div>}
         {contractFound && <div className="listings-grid">
-          {(listingIds.length > 0) && <h1>{listingIds.length}
-            Listings. {this.renderFilteredBy(this.props.query)}
-          </h1>}
           <div className="row">
             {showListingsIds.map(listingId => (<ListingCard listingId={listingId} key={listingId}/>))}
           </div>

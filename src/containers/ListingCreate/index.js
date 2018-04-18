@@ -55,9 +55,9 @@ class ListingCreate extends Component {
         name: 'Services',
         'img': 'services.jpg'
       }, {
-        type: 'announcements',
-        name: 'Announcements',
-        'img': 'announcements.jpg'
+        type: 'mobile-tablet',
+        name: 'Mobile & Tablet',
+        img: 'mobile-tablet.jpg'
       }
     ];
 
@@ -136,12 +136,14 @@ class ListingCreate extends Component {
     try {
       console.log(formListing)
       this.setState({step: this.STEP.METAMASK})
-      const transactionReceipt = await this.o2oprotocol
+      const transactionReceipt = await this
+        .o2oprotocol
         .listings
         .create(formListing.formData, selectedSchemaType)
       this.setState({step: this.STEP.PROCESSING})
       // Submitted to blockchain, now wait for confirmation
-      const blockNumber = await this.o2oprotocol
+      const blockNumber = await this
+        .o2oprotocol
         .contractService
         .waitTransactionFinished(transactionReceipt.tx)
       console.log('>>> blockNumber >>> ', blockNumber);

@@ -2503,7 +2503,7 @@ a.carousel-control span.fa {
 
 .section-header-small .parallax,
 .section-header-small .static-image {
-  min-height: 50vh;
+  min-height: 30vh;
   height: auto;
 }
 
@@ -3521,11 +3521,11 @@ body.noscroll {
 .section-header-small .parallax,
 .section-header-about .parallax,
 .section-presentation-page .parallax {
-  height: 70vh;
+  height: 30vh;
 }
 
 .section.section-30-vh .parallax {
-  height: 40vh !important;
+  height: 30vh !important;
   min-height: 30vh !important;
 }
 
@@ -3929,13 +3929,13 @@ body.noscroll {
     padding: 0 !important;
   }
   .section-header .parallax, .section-header .static-image {
-    height: 80vh;
+    height: 30vh;
   }
   .section-header .parallax:after, .section-header .static-image:after {
-    height: 80vh;
+    height: 30vh;
   }
   .section-header .content {
-    top: 50%;
+    top: 65%;
   }
   .section-header .content h1, .section-header .content h5, .section-header .content p {
     margin: 0;

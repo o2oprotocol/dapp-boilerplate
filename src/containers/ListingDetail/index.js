@@ -6,6 +6,7 @@ import Header from 'components/Header';
 import StaticModal from 'components/StaticModal';
 import SectionSeparator from 'components/Section/SectionSeparator';
 import FaceImg from 'assets/images/avatar.png';
+import Lightbox from 'react-image-lightbox';
 
 import './index.css';
 
@@ -30,7 +31,9 @@ class ListingsDetail extends Component {
       sellerAddress: null,
       unitsAvailable: null,
       pictures: [],
-      step: this.STEP.VIEW
+      step: this.STEP.VIEW,
+      photoIndex: 0,
+      isOpen: false
     }
 
     this.handleBuyClicked = this
@@ -86,6 +89,10 @@ class ListingsDetail extends Component {
     }
   }
 
+  handleImageClick() {
+    this.setState({isOpen: true});
+  }
+
   renderModalIfThereIs() {
     return (
       <div>
@@ -129,91 +136,169 @@ class ListingsDetail extends Component {
     );
   }
 
+  renderDetailHeader() {
+    return (
+      <div className="row">
+        <div className="col-md-12">
+          <h2>{this.state.name}</h2>
+        </div>
+        <div className="col-md-9">
+          <div className="category">{this.state.category}</div>
+          <div className="category">
+            <span>{this.state.sellerAddress}</span>
+          </div>
+        </div>
+        <div className="col-md-2 col-md-offset-1">
+          <div className="avatar avatar-info">
+            <img alt={this.state.sellerAddress} src={FaceImg}/>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  renderDetailSummary() {
+    return (
+      <div className="row">
+        <ul className="list-group">
+          <li className="summary-item">
+            <i className="fa fa-map-marker-alt"></i>
+            <span>Location: {this.state.location}</span>
+          </li>
+          <li className="summary-item">
+            <i className="fa fa-hdd"></i>
+            <span>IPFS:</span>
+            <a
+              href={this
+              .o2oprotocol
+              .ipfsService
+              .gatewayUrlForHash(this.state.ipfsHash)}
+              target="_blank">
+              <span>
+                {this.state.ipfsHash}</span>
+            </a>
+          </li>
+          <li className="summary-item">
+            <i className="fa fa-user"></i>
+            <span>Seller: {this.state.sellerAddress}</span>
+          </li>
+          <li className="summary-item">
+            <i className="fa fa-shopping-cart"></i>
+            {this.state.unitsAvailable > 0 && (
+              <span>Units: {this.state.unitsAvailable}</span>
+            )}
+            {this.state.unitsAvailable <= 0 && (
+              <span>SOLD</span>
+            )}
+          </li>
+        </ul>
+      </div>
+    );
+  }
+
+  renderDescription() {
+    return (
+      <div className="row">
+        <div className="col-md-12">
+          <p>{this.state.description}</p>
+        </div>
+      </div>
+    );
+  }
+
+  renderImagesViewer() {
+    const {photoIndex, isOpen, pictures} = this.state;
+    return (
+      <div>
+        {isOpen && (<Lightbox
+          mainSrc={pictures[photoIndex]}
+          nextSrc={pictures[(photoIndex + 1) % pictures.length]}
+          prevSrc={pictures[(photoIndex + pictures.length - 1) % pictures.length]}
+          onCloseRequest={() => this.setState({isOpen: false})}
+          onMovePrevRequest={() => this.setState({
+          photoIndex: (photoIndex + pictures.length - 1) % pictures.length
+        })}
+          onMoveNextRequest={() => this.setState({
+          photoIndex: (photoIndex + 1) % pictures.length
+        })}/>)}
+      </div>
+    );
+  }
+
   renderDetail() {
     const price = typeof this.state.price === 'string'
       ? 0
       : this.state.price;
+    const {pictures} = this.state;
+    const hasPicture = pictures && pictures.length > 0;
+    const sold = this.state.unitsAvailable <= 0;
+
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8">
-            <div className="content-blog">
-              {this.state.pictures && (
-                <div className="carousel">
-                  {this
-                    .state
-                    .pictures
-                    .map(pictureUrl => (
-                      <div className="photo" key={pictureUrl}>
-                        {(new URL(pictureUrl).protocol === "data:") && <img src={pictureUrl} alt=""/>}
-                      </div>
-                    ))}
-                </div>
-              )}
-              <div className="description">
-                <div className="container listing-container">
-                  <div className="row">
-                    <div className="col-12 col-md-8 detail-info-box">
-                      <div className="title">{this.state.name}</div>
-                      <div className="description">{this.state.description}</div>
-                      <div className="category">Seller</div>
-                      <div className="description">{this.state.sellerAddress}</div>
-                      <a
-                        href={this
-                        .o2oprotocol
-                        .ipfsService
-                        .gatewayUrlForHash(this.state.ipfsHash)}
-                        target="_blank">
-                        View on IPFS
-                        <big>&rsaquo;</big>
-                      </a>
-                      <div className="debug">
-                        <li>IPFS: {this.state.ipfsHash}</li>
-                        <li>Seller: {this.state.sellerAddress}</li>
-                        <li>Units: {this.state.unitsAvailable}</li>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      <div className="container item-detail">
+        <div className="row pad-tb-40">
+          <div className="col-md-8 col-sm-12">
+            <div className="content-wrapper">
+              {this.renderDetailHeader()}
+              {this.renderDetailSummary()}
+              {this.renderDescription()}
             </div>
           </div>
-          <div className="col-md-3 col-md-offset-1 text-center">
-            <h3 className="social-title">Seller</h3>
-            <div className="author">
-              <div className="avatar avatar-danger">
-                <img alt={this.state.sellerAddress} src={FaceImg}/>
-              </div>
-              <div className="description text-center">
-                <h3 className="big-text">{this.state.sellerAddress}</h3>
-              </div>
+          <div className="col-md-4 col-sm-12 text-center">
+            <div className="row">
+              {hasPicture && (
+                <div className="photo" key={pictures[0]}>
+                  <div
+                    className="expand"
+                    onClick={this
+                    .handleImageClick
+                    .bind(this)}>
+                    {(new URL(pictures[0]).protocol === "data:") && <img className="img-responsive" src={pictures[0]} alt=""/>}
+                  </div>
+                </div>
+              )}
+              {hasPicture && this.renderImagesViewer()}
             </div>
-            <h3 className="social-title">Categories</h3>
-            <span className="label label-fill label-danger">{this.state.category}</span>
-            <h3 className="scocial-title">Price</h3>
-            <span className="label label-fill label-info">{Number(price).toLocaleString(undefined, {minimumFractionDigits: 3})}
-              ETH</span>
-            {(this.state.unitsAvailable > 1) && (
-              <div style={{ marginBottom: '5px'}}>
-                <span>Units Available</span>
-                <span className="price">{this
-                    .state
-                    .unitsAvailable
-                    .toLocaleString()}</span>
+
+            <div className="row pad-tb-10">
+              <div className="col-md-12">
+                <div className="col-md-6">
+                  <div className="row">
+                    <div className="col-md-12">
+                      <span className="price pull-left">{Number(price).toLocaleString(undefined, {minimumFractionDigits: 3})}</span>
+                      <span className="unit pull-left">ETH</span>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <span className="stars">
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                      <i className="fa fa-star"></i>
+                    </span>
+                    <span className="reviews">99 reviews</span>
+                  </div>
+                </div>
+                <div className="col-md-5 col-md-offset-1">
+                  {(this.props.listingId) && (
+                    <button
+                      className={`btn btn-fill btn-${sold
+                      ? 'danger'
+                      : 'info'}`}
+                      onClick={this.handleBuyClicked}
+                      disabled={!this.props.listingId || sold}
+                      onMouseDown={e => e.preventDefault()}>
+                      {sold
+                        ? (
+                          <span>SOLD</span>
+                        )
+                        : (
+                          <span>Buy Now</span>
+                        )}
+                    </button>
+                  )}
+                </div>
               </div>
-            )}
-            <div>
-              {(this.props.listingId) && ((this.state.unitsAvailable > 0)
-                ? <button
-                    className="btn btn-info btn-fill"
-                    onClick={this.handleBuyClicked}
-                    disabled={!this.props.listingId}
-                    onMouseDown={e => e.preventDefault()}>
-                    Buy Now
-                  </button>
-                : (
-                  <span className="label label-fill label-danger">Sold</span>
-                ))}
             </div>
           </div>
         </div>

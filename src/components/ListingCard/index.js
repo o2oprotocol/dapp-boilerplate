@@ -37,12 +37,15 @@ class ListingCard extends Component {
     return (
       <div className="col-12 col-md-6 col-lg-4">
         <div className="card card-blog">
-          <Link to={`/listing/${this.props.listingId}`} className="header">
-            <img
-              src={(this.state.pictures && this.state.pictures.length > 0 && (new URL(this.state.pictures[0])).protocol === "data:")
-              ? this.state.pictures[0]
-              : '/images/default-image.jpg'}
-              className="image-header" alt={this.state.name}></img>
+          <Link to={`/listing/${this.props.listingId}`} className="header card-image">
+            <div className="img-wrapper">
+              <img
+                src={(this.state.pictures && this.state.pictures.length > 0 && (new URL(this.state.pictures[0])).protocol === "data:")
+                ? this.state.pictures[0]
+                : '/images/default-image.jpg'}
+                className="image-header"
+                alt={this.state.name}></img>
+            </div>
           </Link>
           <div className="content">
             <div className="circle-black">
@@ -53,13 +56,15 @@ class ListingCard extends Component {
                 </div>
               </div>
             </div>
-            <a href="" className="card-title">
+            <Link to={`/listing/${this.props.listingId}`} className="card-title">
               <h3>{this.state.name}</h3>
-            </a>
+            </Link>
             <h6 className="card-category text-warning">{this.state.category}</h6>
             <p className="text-description text-gray">{this.state.description}</p>
           </div>
-          {this.state.unitsAvailable === 0 && <div className="ribbon-wrapper-sold"><div className="ribbon-sold">SOLD</div></div>}
+          {this.state.unitsAvailable === 0 && <div className="ribbon-wrapper-sold">
+            <div className="ribbon-sold">SOLD</div>
+          </div>}
         </div>
       </div>
     )
