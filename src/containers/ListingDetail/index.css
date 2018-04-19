@@ -97,6 +97,11 @@
   margin: 45%;
 }
 
+.item-detail .expand img {
+  width: 100%;
+  max-width: 400px;
+}
+
 .item-detail .price {
   margin: 0px 5px !important;
   word-wrap: break-word !important;
@@ -125,7 +130,7 @@
 }
 
 .item-detail .reviews {
-  color: #0099ac !important;
+  color: #e78b90 !important;
   font: inherit !important;
   font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif !important;
   text-decoration: none !important;
@@ -147,7 +152,7 @@
 .item-detail .stars {
   padding-left: 10px;
   font-size: 12px;
-  color: #0099ac;
+  color: #e78b90;
 }
 
 .pad-tb-40 {

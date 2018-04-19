@@ -2,6 +2,7 @@
   "files.associations": {
     "*.js": "javascriptreact"
   },
-  "[javascriptreact]": {
-  }
+  "[javascriptreact]": {},
+  "prettier.singleQuote": true,
+  "prettier.trailingComma": "all"
 }

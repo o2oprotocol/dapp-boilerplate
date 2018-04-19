@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
 import {withRouter} from 'react-router';
-import Pagination from 'react-js-pagination';
-import alertify from 'alertifyjs';
 import PropTypes from 'prop-types';
 
 import Header from 'components/Header';

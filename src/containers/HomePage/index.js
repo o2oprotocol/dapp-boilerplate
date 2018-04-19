@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {withRouter} from 'react-router';
+import React, { Component } from 'react';
+import { withRouter } from 'react-router';
 import QueryString from 'query-string';
 
 import Listings from 'containers/ListingsGrid';
@@ -8,41 +8,66 @@ import Header from 'components/Header';
 import SearchBox from 'components/SearchBox';
 import HeaderBackground from 'assets/images/banner.png';
 
-
-const HomePageHeader = (props) => (
-  <Header bgImage={HeaderBackground} classes={["section-header"]}>
-    <SearchBox onSearchClick={props.onSearchClick}/>
-  </Header>
-);
+const HomePageHeader = props => {
+  const { data } = props;
+  return (
+    <Header
+      bgImage={HeaderBackground}
+      classes={['section-header-small']}
+      bgColor="black"
+    >
+      <SearchBox onSearchClick={props.onSearchClick} data={data} />
+    </Header>
+  );
+};
 
 class HomePage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      query: '',
       products: [],
-      listings: []
+      listings: [],
+      listingsIds: [],
     };
-    this.handleSearchClick = this
-      .handleSearchClick
-      .bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
   }
 
   handleSearchClick(query) {
-    window.location.href = `/?q=${query}`
+    this.setState({ query });
   }
 
-  handleOnSearch(listings) {
+  handleOnUpdate(listingsMap) {
+    const listings = Object.values(listingsMap);
     this.setState({ listings: listings });
   }
 
+  handleOnSearch(listingsIds) {
+    this.setState({ listingsIds });
+  }
+
+  componentDidMount() {
+    const { q } = QueryString.parse(this.props.location.search);
+    this.setState({ query: q });
+  }
+
   render() {
-    const {q} = QueryString.parse(this.props.location.search)
     return (
       <div className="home">
-        {!q && <HomePageHeader onSearchClick={this.handleSearchClick}/>}
-        <Section title={`${this.state.listings.length} Listings`} separator={true}>
-          <Listings query={q} onSearch={this.handleOnSearch.bind(this)}/>
+        <HomePageHeader
+          onSearchClick={this.handleSearchClick}
+          data={this.state.listings}
+        />
+        <Section
+          title={`${this.state.listingsIds.length} Listings`}
+          separator={true}
+        >
+          <Listings
+            query={this.state.query}
+            onSearch={this.handleOnSearch.bind(this)}
+            onUpdate={this.handleOnUpdate.bind(this)}
+          />
         </Section>
       </div>
     );

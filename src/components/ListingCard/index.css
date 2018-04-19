@@ -2,8 +2,23 @@
   height: 300px;
 }
 
+.listings-grid .text-description {
+  text-align: left;
+  margin-left: 5px;
+}
+
 .card:not(.card-plain):not(.card-price):hover .ribbon-wrapper-sold {
   right: -3px;
+}
+
+.listings-grid .card-title h3 {
+  height: 46px;
+}
+
+.listings-grid .list-group li {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .ribbon-wrapper-sold {
@@ -31,7 +46,13 @@
   top: 15px;
   width: 120px;
   background-color: #fd8f8f;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#fd8f8f), to(#f92929));
+  background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(#fd8f8f),
+    to(#f92929)
+  );
   background-image: -webkit-linear-gradient(top, #fd8f8f, #f92929);
   background-image: -moz-linear-gradient(top, #fd8f8f, #f92929);
   background-image: -ms-linear-gradient(top, #fd8f8f, #f92929);
@@ -44,7 +65,7 @@
 
 .ribbon-sold:before,
 .ribbon-sold:after {
-  content: "";
+  content: '';
   border-top: 3px solid #f92929;
   border-left: 3px solid transparent;
   border-right: 3px solid transparent;

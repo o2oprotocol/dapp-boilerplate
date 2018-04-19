@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import SectionSeparator from './SectionSeparator';
 
+import './index.css';
+
 class Section extends Component {
   render() {
     return (
-      <div className="section">
+      <div className="section pad-t-20">
         <div className="container">
           {this.props.title && (
             <div className="row">
