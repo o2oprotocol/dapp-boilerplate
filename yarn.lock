@@ -5976,9 +5976,9 @@ number-to-bn@1.7.0:
   version "1.4.4"
   resolved "https://registry.yarnpkg.com/nwmatcher/-/nwmatcher-1.4.4.tgz#2285631f34a95f0d0395cd900c96ed39b58f346e"
 
-o2oprotocol@^0.0.21:
-  version "0.0.21"
-  resolved "https://registry.yarnpkg.com/o2oprotocol/-/o2oprotocol-0.0.21.tgz#587ae3e07e3be5dee0ade3532953659872f7dcd9"
+o2oprotocol@^0.0.24:
+  version "0.0.24"
+  resolved "https://registry.yarnpkg.com/o2oprotocol/-/o2oprotocol-0.0.24.tgz#00be63101220330374b5ec966d592bb910848687"
   dependencies:
     ajv "^6.4.0"
     babel-polyfill "^6.23.0"
